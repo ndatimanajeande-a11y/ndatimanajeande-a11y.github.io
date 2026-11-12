@@ -33,7 +33,12 @@ html{scroll-behavior:smooth}
 @media(max-width:640px){.project{padding:28px 20px;margin:14px 0}}
 @media(prefers-reduced-motion:reduce){.project,.project:before,.project h2,.project .links a,.project>p>a{transition:none!important;animation:none!important}.project:hover{transform:none}}
 
-.video-showcase{margin:26px 0;padding:22px;border:1px solid #dce8fa;border-radius:18px;background:linear-gradient(135deg,#f1f6ff,#fbfaff)}.video-showcase h3{margin-top:0}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.video-showcase{position:relative;margin:30px 0;padding:24px;border:1px solid #dce8fa;border-radius:20px;background:linear-gradient(135deg,#eef5ff,#faf5ff);box-shadow:0 12px 36px #3478e51a;overflow:hidden;animation:showcaseEnter .8s ease both}
+.video-showcase:before{content:"";position:absolute;inset:-60% auto -60% -45%;width:35%;transform:rotate(22deg);background:linear-gradient(90deg,transparent,#fff9,transparent);animation:videoShine 5s ease-in-out infinite}
+.video-showcase h3{margin-top:0}.video-showcase video{position:relative;z-index:1;outline:1px solid #ffffff80;transition:transform .35s ease,box-shadow .35s ease}.video-showcase video:hover{transform:scale(1.008);box-shadow:0 18px 44px #17263a30}
+@keyframes showcaseEnter{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes videoShine{0%,65%,100%{left:-45%}35%{left:130%}}
+.project:nth-of-type(odd){animation-delay:.08s}.project:nth-of-type(even){animation-delay:.18s}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.video-showcase,.video-showcase:before{animation:none!important}.video-showcase video{transition:none!important}}
 </style>
 </head>
 <body>
