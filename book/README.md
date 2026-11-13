@@ -18,3 +18,9 @@ Personal admissions and scholarship details are presented as author-provided inf
 
 ---
 [Open the online book page](https://ndatimanajeande-a11y.github.io/book/)
+
+## Remaining work and page target
+
+**Status:** Work in progress. Three of the planned twelve chapters are currently published. The manuscript has not yet reached the 50-page target, and an exact remaining-page count has not been measured.
+
+**Next steps:** Draft and publish Chapters 4–12, then edit and format the complete manuscript to reach approximately 50 pages. Verify the final page count after the full manuscript is assembled. Keep all personal, admissions, scholarship, and programme details accurate; label user-reported information where original documents have not been verified.
