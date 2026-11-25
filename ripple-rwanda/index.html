@@ -56,8 +56,10 @@
   </style>
 
   <style>
-    /* Let the browser defer off-screen section rendering on long pages. */
-    main > section, main > article { content-visibility: auto; contain-intrinsic-size: auto 650px; }
+    /* Defer rendering of off-screen page sections without affecting the hero. */
+    body > section { content-visibility: auto; contain-intrinsic-size: auto 650px; }
+    :focus-visible { outline: 3px solid #F59E0B; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-700 selection:text-white">
@@ -536,9 +538,9 @@
 
             <!-- QR Code Container -->
             <div class="my-6 flex flex-col items-center justify-center bg-white rounded-2xl p-5 text-slate-900 shadow-inner">
-              <canvas id="qrCanvas" width="168" height="168" class="rounded-lg"></canvas>
+              <div id="qrCanvas" class="rounded-lg" role="img" aria-label="Scannable sample waybill QR code"></div>
               <p id="waybillCodeText" class="font-mono font-bold text-base tracking-widest text-slate-900 mt-3">RPL-KGL-104</p>
-              <p class="text-[11px] text-slate-500 mt-0.5">Decorative QR-style graphic only. It is not scannable.</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Scannable demo QR. It contains a sample reference only, not live verification.</p>
             </div>
 
             <!-- Waybill Details Summary -->
@@ -623,29 +625,29 @@
               <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
                 <i class="fa-solid fa-check"></i>
               </span>
-              <h4 class="font-bold text-sm text-slate-900">1. Booking Confirmed via QR Stand</h4>
-              <p class="text-xs text-slate-500">09:38 AM • Kimironko Market Gate (KG 145 St) • Fixed Fare: 1,500 RWF</p>
+              <h4 class="font-bold text-sm text-slate-900">1. Sample booking reference created</h4>
+              <p class="text-xs text-slate-500">Illustrative event only • no real booking was placed</p>
             </li>
             <li class="ml-6">
               <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
                 <i class="fa-solid fa-check"></i>
               </span>
-              <h4 class="font-bold text-sm text-slate-900">2. Scanned & Sealed at Consolidation Point</h4>
-              <p class="text-xs text-slate-500">09:55 AM • Assigned to Vetted Partner Rider (FERWACOTAMO #RW-412)</p>
+              <h4 class="font-bold text-sm text-slate-900">2. Sample handover checkpoint</h4>
+              <p class="text-xs text-slate-500">Illustrative event only • no rider has been assigned</p>
             </li>
             <li class="ml-6">
               <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
                 <i class="fa-solid fa-check"></i>
               </span>
-              <h4 class="font-bold text-sm text-slate-900">3. Departed on 10:00 AM Scheduled Corridor Run</h4>
-              <p class="text-xs text-slate-500">10:02 AM • En route Kimironko → Kisimenti → Kacyiru</p>
+              <h4 class="font-bold text-sm text-slate-900">3. Sample route departure</h4>
+              <p class="text-xs text-slate-500">Illustrative route only • no vehicle is being tracked</p>
             </li>
             <li class="ml-6">
               <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-amber-500 rounded-full ring-4 ring-white text-slate-950 text-[10px]">
                 <i class="fa-solid fa-camera"></i>
               </span>
-              <h4 class="font-bold text-sm text-slate-900">4. Delivered & Recipient QR Scanned</h4>
-              <p class="text-xs text-slate-500">10:29 AM • Signed off by recipient at Kisimenti • SMS receipt sent to vendor</p>
+              <h4 class="font-bold text-sm text-slate-900">4. Sample delivery completion</h4>
+              <p class="text-xs text-slate-500">Illustrative event only • no proof of delivery or SMS exists</p>
             </li>
           </ol>
         </div>
@@ -898,7 +900,7 @@
         <p class="text-xs text-slate-500 mt-1">KG 145 St Consolidation Point • Departures: 10:00, 13:00, 16:00</p>
 
         <div class="my-5 bg-slate-50 border-2 border-dashed border-emerald-600/50 rounded-2xl p-5 flex flex-col items-center">
-          <canvas id="stationQrCanvas" width="160" height="160"></canvas>
+          <div id="stationQrCanvas" role="img" aria-label="Scannable sample hub QR code"></div>
           <span class="font-mono font-bold text-sm text-emerald-900 mt-3">HUB: KGL-KIMIRONKO-01</span>
           <span class="text-[11px] text-slate-500">USSD: proposed feature only, not active</span>
         </div>
@@ -968,9 +970,9 @@
         slot: "10:00 AM",
         size: "Medium Box / Bag",
         price: "1,500 RWF",
-        vendor: "Mama Aline Fresh Produce",
-        recipient: "Kisimenti Buyer",
-        status: "Delivered & Photo Verified",
+        vendor: "Sample vendor (illustrative)",
+        recipient: "Sample recipient (illustrative)",
+        status: "Sample record only • no live delivery event",
         isCustom: false
       }
     };
@@ -995,52 +997,45 @@
       menu.classList.toggle('hidden');
     }
 
-    // Decorative QR-style illustration only; this is NOT a standards-compliant or scannable QR code.
-    function renderQRCode(canvasId, text) {
-      const canvas = document.getElementById(canvasId);
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const size = canvas.width;
-      const cells = 21;
-      const cellSize = Math.floor(size / cells);
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, size, size);
-
-      // Simple hash seed from text
-      let seed = 0;
-      for (let i = 0; i < text.length; i++) {
-        seed = (seed * 31 + text.charCodeAt(i)) % 9973;
+    // Load a standards-compliant QR encoder only when a QR is needed.
+    let qrLibraryPromise;
+    function ensureQrLibrary() {
+      if (window.QRCode) return Promise.resolve();
+      if (!qrLibraryPromise) {
+        qrLibraryPromise = new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+          script.async = true;
+          script.onload = () => window.QRCode ? resolve() : reject(new Error('QR library unavailable'));
+          script.onerror = () => reject(new Error('QR library failed to load'));
+          document.head.appendChild(script);
+        });
       }
+      return qrLibraryPromise;
+    }
 
-      function drawFinderPattern(x, y) {
-        ctx.fillStyle = '#064E3B';
-        ctx.fillRect(x * cellSize, y * cellSize, 7 * cellSize, 7 * cellSize);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect((x + 1) * cellSize, (y + 1) * cellSize, 5 * cellSize, 5 * cellSize);
-        ctx.fillStyle = '#064E3B';
-        ctx.fillRect((x + 2) * cellSize, (y + 2) * cellSize, 3 * cellSize, 3 * cellSize);
+    async function renderQRCode(containerId, value) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.replaceChildren();
+      container.className = 'flex items-center justify-center min-h-[160px] min-w-[160px]';
+      try {
+        await ensureQrLibrary();
+        new QRCode(container, {
+          text: String(value),
+          width: 160,
+          height: 160,
+          colorDark: '#064E3B',
+          colorLight: '#FFFFFF',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } catch (error) {
+        const fallback = document.createElement('span');
+        fallback.className = 'text-xs text-center text-slate-600 p-3';
+        fallback.textContent = 'QR preview unavailable. Reference: ' + String(value);
+        container.appendChild(fallback);
+        console.error(error);
       }
-
-      // Draw data modules
-      for (let r = 0; r < cells; r++) {
-        for (let c = 0; c < cells; c++) {
-          // Skip finder pattern corners
-          if ((r < 8 && c < 8) || (r < 8 && c >= cells - 8) || (r >= cells - 8 && c < 8)) {
-            continue;
-          }
-          seed = (seed * 16807 + r * 17 + c * 31) % 2147483647;
-          if (seed % 3 !== 0) {
-            ctx.fillStyle = (r + c) % 7 === 0 ? '#047857' : '#0F172A';
-            ctx.fillRect(c * cellSize, r * cellSize, cellSize - 1, cellSize - 1);
-          }
-        }
-      }
-
-      // Three QR finder corners
-      drawFinderPattern(0, 0);
-      drawFinderPattern(cells - 7, 0);
-      drawFinderPattern(0, cells - 7);
     }
 
     // Sync Hero Quick Estimator with Main Booking Form
@@ -1152,6 +1147,13 @@
       showToast(`Copied ${code} to clipboard`);
     }
 
+    // Escape untrusted form values before placing them in HTML templates.
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[character]);
+    }
+
     // Live Tracker Logic
     function fillSampleTrack(id) {
       document.getElementById('trackInput').value = id;
@@ -1176,25 +1178,25 @@
             <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
               <i class="fa-solid fa-check"></i>
             </span>
-            <h4 class="font-bold text-sm text-slate-900">1. Demo waybill created (${record.slot} run)</h4>
-            <p class="text-xs text-slate-500">Just now • Origin: ${record.origin} • Fixed Fare: ${record.price}</p>
+            <h4 class="font-bold text-sm text-slate-900">1. Demo waybill created (${escapeHTML(record.slot)} run)</h4>
+            <p class="text-xs text-slate-500">Just now • Origin: ${escapeHTML(record.origin)} • Fixed Fare: ${escapeHTML(record.price)}</p>
           </li>
           <li class="ml-6">
             <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-amber-500 rounded-full ring-4 ring-white text-slate-950 text-[10px] animate-pulse">
               <i class="fa-solid fa-qrcode"></i>
             </span>
-            <h4 class="font-bold text-sm text-slate-900">2. Awaiting manual confirmation at ${record.origin}</h4>
-            <p class="text-xs text-slate-500">Contact the team to confirm availability before ${record.slot}</p>
+            <h4 class="font-bold text-sm text-slate-900">2. Awaiting manual confirmation at ${escapeHTML(record.origin)}</h4>
+            <p class="text-xs text-slate-500">Contact the team to confirm availability before ${escapeHTML(record.slot)}</p>
           </li>
           <li class="ml-6 opacity-50">
             <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-slate-300 rounded-full ring-4 ring-white text-white text-[10px]">3</span>
-            <h4 class="font-bold text-sm text-slate-700">3. Scheduled Corridor Transit to ${record.dest}</h4>
+            <h4 class="font-bold text-sm text-slate-700">3. Scheduled Corridor Transit to ${escapeHTML(record.dest)}</h4>
             <p class="text-xs text-slate-500">Illustrative route only • no carrier has been assigned</p>
           </li>
           <li class="ml-6 opacity-50">
             <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-slate-300 rounded-full ring-4 ring-white text-white text-[10px]">4</span>
             <h4 class="font-bold text-sm text-slate-700">4. Recipient handover (proposed workflow)</h4>
-            <p class="text-xs text-slate-500">Proposed recipient: ${record.recipient}</p>
+            <p class="text-xs text-slate-500">Proposed recipient: ${escapeHTML(record.recipient)}</p>
           </li>
         `;
       } else if (rawId === 'RPL-KGL-104') {
@@ -1259,7 +1261,7 @@
       }, 3400);
     }
 
-    // Initialize default QR codes on page load
+    // Initialize real QR codes on page load
     window.addEventListener('DOMContentLoaded', () => {
       renderQRCode('qrCanvas', 'RPL-KGL-104');
       renderQRCode('stationQrCanvas', 'KGL-KIMIRONKO-01');
