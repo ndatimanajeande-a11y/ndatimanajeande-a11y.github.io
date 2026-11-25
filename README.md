@@ -19,6 +19,11 @@ Official portfolio website for **Ndatimana Jean de Dieu**, a Computer Science st
 - Reduced-motion support and subtle page animations
 - Custom branded 404 page
 
+## Featured project prototype
+
+- Ripple Rwanda logistics concept: https://ndatimanajeande-a11y.github.io/ripple-rwanda/
+- This is a front-end demonstration only. Booking, QR-style visuals, tracking and partner enquiries are not connected to a live backend.
+
 ## Publishing
 
 This repository is configured as a GitHub Pages user site. Changes committed to the default branch are published at the homepage URL above. The sitemap is available at:
