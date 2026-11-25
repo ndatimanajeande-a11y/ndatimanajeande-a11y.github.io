@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ripple Rwanda | Kigali Scheduled Cargo Delivery Prototype</title>
+  <meta name="description" content="Explore the Ripple Rwanda concept: scheduled, fixed-price cargo delivery for market vendors and small businesses in Kigali. View the prototype booking flow, sample waybill and partner information.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#064E3B">
+  <link rel="canonical" href="https://ndatimanajeande-a11y.github.io/ripple-rwanda/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ripple Rwanda | Kigali Cargo Delivery Prototype">
+  <meta property="og:description" content="A Kigali logistics concept for scheduled, fixed-price parcel delivery. Explore the interactive prototype.
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            emerald: {
+              850: '#064E3B',
+              900: '#065F46',
+              700: '#047857',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom subtle wave pattern for logistics aesthetic */
+    .ripple-bg {
+      background-color: #064E3B;
+      background-image: radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.14) 0%, transparent 45%),
+                        radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.2) 0%, transparent 50%);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-700 selection:text-white">
+
+  <!-- Prototype disclosure: this page is a concept/demo, not a live dispatch platform. -->
+  <div class="bg-amber-100 text-amber-950 text-sm py-3 px-4 text-center font-semibold border-b border-amber-300" role="status">
+    CONCEPT WEBSITE / DEMO ONLY: bookings, tracking and partner registrations are not stored or dispatched automatically. Contact the team on WhatsApp to discuss a real request.
+  </div>
+
+  <!-- Top Pilot Announcement Bar -->
+  <div class="bg-emerald-950 text-emerald-100 text-xs sm:text-sm py-2 px-4 text-center border-b border-emerald-800/60">
+    <span class="inline-flex items-center gap-2 font-medium">
+      <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+      <span data-i18n="topBanner">Planned Kimironko pilot: 7 December 2026 • Proposed scheduled runs at 10:00, 13:00 & 16:00</span>
+    </span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 sm:h-20">
+        <!-- Brand Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-emerald-800 flex items-center justify-center shadow-md group-hover:bg-emerald-700 transition">
+            <!-- Custom SVG Ripple Logo -->
+            <svg class="w-6 h-6 text-white" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 27V9H17.5C20.5376 9 23 11.4624 23 14.5C23 17.5376 20.5376 20 17.5 20H9" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16.5 20L22.5 27" stroke="#F59E0B" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M26 11C28.2 13.2 28.2 16.8 26 19" stroke="#F59E0B" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M29.5 8.5C33 12 33 18 29.5 21.5" stroke="#34D399" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-display font-extrabold text-xl tracking-tight text-slate-900">Ripple<span class="text-emerald-700">.rw</span></span>
+            <span class="block text-[10px] uppercase tracking-wider font-semibold text-slate-500 -mt-1">Kigali Cargo Network</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
+          <a href="#why-ripple" class="hover:text-emerald-700 transition" data-i18n="navWhy">Why Ripple</a>
+          <a href="#how-it-works" class="hover:text-emerald-700 transition" data-i18n="navHow">How It Works</a>
+          <a href="#book-run" class="hover:text-emerald-700 transition" data-i18n="navBook">Pricing & Booking</a>
+          <a href="#track-parcel" class="hover:text-emerald-700 transition" data-i18n="navTrack">Track QR</a>
+          <a href="#partners" class="hover:text-emerald-700 transition" data-i18n="navPartners">Riders & Partners</a>
+          <a href="#about" class="hover:text-emerald-700 transition" data-i18n="navAbout">About</a>
+        </nav>
+
+        <!-- Actions: Language Switcher + CTA -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button id="langToggleBtn" onclick="toggleLanguage()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs sm:text-sm font-semibold text-slate-700 transition" title="Switch Language / Hindura Ururimi">
+            <i class="fa-solid fa-globe text-emerald-700"></i>
+            <span id="langLabel">EN / RW</span>
+          </button>
+
+          <a href="#book-run" class="hidden sm:inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-sm transition">
+            <span data-i18n="navCta">Book Delivery</span>
+            <i class="fa-solid fa-arrow-right text-xs text-amber-400"></i>
+          </a>
+
+          <!-- Mobile Hamburger -->
+          <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100" aria-label="Open Menu">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-slate-200 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+      <a href="#why-ripple" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" data-i18n="navWhy">Why Ripple</a>
+      <a href="#how-it-works" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" data-i18n="navHow">How It Works</a>
+      <a href="#book-run" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" data-i18n="navBook">Pricing & Booking</a>
+      <a href="#track-parcel" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" data-i18n="navTrack">Track QR</a>
+      <a href="#partners" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" data-i18n="navPartners">Riders & Partners</a>
+      <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800" data-i18n="navAbout">About</a>
+      <div class="pt-2">
+        <a href="#book-run" onclick="toggleMobileMenu()" class="block w-full text-center bg-emerald-800 text-white font-semibold py-3 rounded-xl shadow" data-i18n="navCta">Book Delivery</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="ripple-bg text-white pt-10 pb-16 sm:pt-16 sm:pb-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Left Column: Value Prop & CTAs -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-amber-300 text-xs sm:text-sm font-semibold">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span data-i18n="heroBadge">Built for Kigali Market Vendors & Boutiques</span>
+          </div>
+
+          <h1 class="font-display text-3xl sm:text-5xl lg:text-[52px] font-extrabold leading-[1.12] tracking-tight" data-i18n="heroHeadline">
+            A simpler way to plan cargo delivery across Kigali
+          </h1>
+
+          <p class="text-base sm:text-lg text-emerald-100/90 max-w-2xl leading-relaxed" data-i18n="heroSubheadline">
+            Ripple Rwanda is a proposed scheduled-delivery service for market vendors and small businesses. This interactive page demonstrates how parcel requests could work. Proposed runs are at <strong class="text-white">10:00 AM, 1:00 PM, and 4:00 PM</strong> via the web and WhatsApp. The booking and tracking screens below are demonstrations, not a live dispatch system.
+          </p>
+
+          <!-- Primary Hero CTAs -->
+          <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
+            <a href="#book-run" class="inline-flex items-center justify-center gap-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-4 rounded-2xl shadow-lg shadow-amber-500/20 transition text-base">
+              <i class="fa-solid fa-box-open"></i>
+              <span data-i18n="heroCtaPrimary">Book a Scheduled Run</span>
+            </a>
+
+            <button onclick="openStationPassModal()" class="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold px-6 py-4 rounded-2xl backdrop-blur-sm transition text-base">
+              <i class="fa-solid fa-qrcode text-amber-400"></i>
+              <span data-i18n="heroCtaQr">Kimironko Gate QR Pass</span>
+            </button>
+          </div>
+
+          <!-- Quick Trust Indicators -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-emerald-700/60 max-w-xl">
+            <div>
+              <p class="text-xl sm:text-2xl font-display font-extrabold text-amber-400">1,000 RWF</p>
+              <p class="text-xs sm:text-sm text-emerald-200" data-i18n="statStarting">Starting fixed rate</p>
+            </div>
+            <div>
+              <p class="text-xl sm:text-2xl font-display font-extrabold text-white">3x Daily</p>
+              <p class="text-xs sm:text-sm text-emerald-200" data-i18n="statRuns">10:00 • 13:00 • 16:00</p>
+            </div>
+            <div>
+              <p class="text-xl sm:text-2xl font-display font-extrabold text-emerald-300">QR Demo</p>
+              <p class="text-xs sm:text-sm text-emerald-200" data-i18n="statProof">Sample waybill display</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Instant Quick-Quote Card -->
+        <div class="lg:col-span-5">
+          <div class="glass-card text-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/40">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Instant Fare Estimator</span>
+                <h2 class="font-display text-xl font-bold text-slate-900">Check Fixed Price in Seconds</h2>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 text-xs font-bold">No Haggling</span>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Pickup Consolidation Hub</label>
+                <select id="heroHub" onchange="syncHeroToMain()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-3 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700">
+                  <option value="Kimironko Market (KG 145 St)">Kimironko Market (KG 145 St)</option>
+                  <option value="Nyabugogo Main Market">Nyabugogo Main Market</option>
+                  <option value="Downtown / Nyarugenge Market">Downtown / Nyarugenge Market</option>
+                  <option value="Remera / Gisimenti">Remera / Gisimenti</option>
+                  <option value="Kicukiro Centre">Kicukiro Centre</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Destination Zone</label>
+                <select id="heroDest" onchange="syncHeroToMain()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-3 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700">
+                  <option value="Remera / Kimironko / Bibare (Zone A)">Remera / Kimironko / Bibare (Zone A)</option>
+                  <option value="Kacyiru / Kimihurura / CBD (Zone B)">Kacyiru / Kimihurura / CBD (Zone B)</option>
+                  <option value="Nyamirambo / Nyabugogo / Gikondo (Zone C)">Nyamirambo / Nyabugogo / Gikondo (Zone C)</option>
+                  <option value="Kicukiro / Kanombe / Masaka (Zone D)">Kicukiro / Kanombe / Masaka (Zone D)</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-1">Cargo Size</label>
+                  <select id="heroSize" onchange="syncHeroToMain()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-3 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700">
+                    <option value="1000">Small Parcel (1,000 RWF)</option>
+                    <option value="1500" selected>Medium Box/Bag (1,500 RWF)</option>
+                    <option value="2000">Large Sack/Crate (2,000 RWF)</option>
+                    <option value="4500">Bulk Mini-Van (4,500 RWF)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-1">Departure Slot</label>
+                  <select id="heroSlot" onchange="syncHeroToMain()" class="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-3 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-700">
+                    <option value="10:00 AM">10:00 AM Run</option>
+                    <option value="1:00 PM">1:00 PM Run</option>
+                    <option value="4:00 PM">4:00 PM Run</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Price Readout Box -->
+              <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold text-emerald-800 block">Guaranteed Fixed Fare</span>
+                  <span class="text-xs text-slate-500">Includes QR seal & SMS alerts</span>
+                </div>
+                <div class="text-right">
+                  <span id="heroPriceDisplay" class="font-display text-2xl font-extrabold text-emerald-900">1,500 RWF</span>
+                </div>
+              </div>
+
+              <a href="#book-run" class="block w-full text-center bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-md transition">
+                Continue to Demo Booking <i class="fa-solid fa-arrow-down ml-1.5 text-amber-400"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: The Problem & Why Ripple -->
+  <section id="why-ripple" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Built for Kigali Commerce</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">Why Market Vendors & Shop Owners Switch to Ripple</h2>
+        <p class="text-slate-600 mt-3 text-sm sm:text-base">
+          Kigali's ban on carrying bulky cargo on passenger buses leaves vendors choosing between expensive private cars or risky informal moto negotiations. Ripple consolidates parcels on fixed routes.
+        </p>
+      </div>
+
+      <!-- Pain vs Solution Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/90 hover:border-emerald-300 transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Fixed Price Before Pickup</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Save 40–60% compared to hiring a whole car. Transparent RWF pricing by parcel size—zero gate-side bargaining.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/90 hover:border-emerald-300 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">3 Predictable Daily Runs</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Departures every day at <strong>10:00 AM, 1:00 PM, and 4:00 PM</strong> from designated market hubs like Kimironko Gate (KG 145 St).
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/90 hover:border-emerald-300 transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">QR Scan Custody Proof</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Every box gets a unique QR waybill scanned at market drop-off and scanned again by your buyer on arrival.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/90 hover:border-emerald-300 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Book Your Way</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            No heavy app download required. Book via Web QR, WhatsApp (<strong>+250 726 591 807</strong>), SMS, or USSD shortcode.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: How It Works (4-Step Visual Flow) -->
+  <section id="how-it-works" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Simple 4-Step Flow</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">From Market Stall to Customer Door</h2>
+        </div>
+        <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700">
+          <i class="fa-solid fa-location-dot text-emerald-700"></i>
+          <span>Primary Pilot Hub: Kimironko Market, KG 145 St</span>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Step 1 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-emerald-800 text-white font-display font-bold text-sm mb-4">1</span>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Book in Under 2 Mins</h3>
+          <p class="text-sm text-slate-600">
+            Scan the Ripple QR stand at the market gate, use this page, or message <span class="font-semibold text-emerald-800">+250 726 591 807</span> on WhatsApp.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-emerald-800 text-white font-display font-bold text-sm mb-4">2</span>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Drop at Market Point</h3>
+          <p class="text-sm text-slate-600">
+            Bring your labeled parcel to the Ripple consolidation point 15 minutes before the 10:00, 13:00, or 16:00 departure.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-emerald-800 text-white font-display font-bold text-sm mb-4">3</span>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Vetted Partner Dispatch</h3>
+          <p class="text-sm text-slate-600">
+            Verified FERWACOTAMO moto riders or partner mini-vans transport bundled cargo safely along scheduled Kigali corridors.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-display font-bold text-sm mb-4">4</span>
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-2">QR Scan Delivery Proof</h3>
+          <p class="text-sm text-slate-600">
+            Your recipient scans the QR pass upon handover, triggering instant digital & photo confirmation back to you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Interactive Booking, Fare Calculator & QR Waybill Generator -->
+  <section id="book-run" class="py-16 sm:py-20 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Interactive Dispatch Desk</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">Try the Booking Demonstration</h2>
+        <p class="text-slate-600 mt-2 text-sm sm:text-base">
+          Choose sample delivery details to preview a waybill. The demo does not reserve a rider, collect payment, or create a live shipment.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Booking Form (7 cols) -->
+        <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="lg:col-span-7 bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="pickupHub" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1.5">Pickup Market / Hub *</label>
+              <select id="pickupHub" required onchange="updateBookingPrice()" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+                <option value="Kimironko Market (KG 145 St)">Kimironko Market (KG 145 St)</option>
+                <option value="Nyabugogo Main Market">Nyabugogo Main Market</option>
+                <option value="Downtown / Nyarugenge Market">Downtown / Nyarugenge Market</option>
+                <option value="Remera / Gisimenti">Remera / Gisimenti</option>
+                <option value="Kicukiro Centre">Kicukiro Centre</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="destZone" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1.5">Destination Zone *</label>
+              <select id="destZone" required onchange="updateBookingPrice()" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+                <option value="Remera / Kimironko / Bibare (Zone A)">Remera / Kimironko / Bibare (Zone A)</option>
+                <option value="Kacyiru / Kimihurura / CBD (Zone B)">Kacyiru / Kimihurura / CBD (Zone B)</option>
+                <option value="Nyamirambo / Nyabugogo / Gikondo (Zone C)">Nyamirambo / Nyabugogo / Gikondo (Zone C)</option>
+                <option value="Kicukiro / Kanombe / Masaka (Zone D)">Kicukiro / Kanombe / Masaka (Zone D)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Package Size Cards -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-2">Select Package Size & Fixed Rate *</label>
+            <div class="grid sm:grid-cols-2 gap-3" id="sizeOptions">
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-2xl p-3.5 flex items-center justify-between hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50/60">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="packageSize" value="1000" data-label="Small Parcel / Shoebox" class="accent-emerald-700 w-4 h-4" onchange="updateBookingPrice()">
+                  <div>
+                    <p class="font-bold text-sm text-slate-900">Small Parcel</p>
+                    <p class="text-xs text-slate-500">Shoebox / Boutique bag (up to 5kg)</p>
+                  </div>
+                </div>
+                <span class="font-display font-extrabold text-emerald-800 text-sm">1,000 RWF</span>
+              </label>
+
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-2xl p-3.5 flex items-center justify-between hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50/60">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="packageSize" value="1500" data-label="Medium Box / Bag" class="accent-emerald-700 w-4 h-4" checked onchange="updateBookingPrice()">
+                  <div>
+                    <p class="font-bold text-sm text-slate-900">Medium Box / Bag</p>
+                    <p class="text-xs text-slate-500">Carton / Stock bundle (5–15kg)</p>
+                  </div>
+                </div>
+                <span class="font-display font-extrabold text-emerald-800 text-sm">1,500 RWF</span>
+              </label>
+
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-2xl p-3.5 flex items-center justify-between hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50/60">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="packageSize" value="2000" data-label="Large Sack / Crate" class="accent-emerald-700 w-4 h-4" onchange="updateBookingPrice()">
+                  <div>
+                    <p class="font-bold text-sm text-slate-900">Large Sack / Crate</p>
+                    <p class="text-xs text-slate-500">Produce crate / Wholesale sack (15–35kg)</p>
+                  </div>
+                </div>
+                <span class="font-display font-extrabold text-emerald-800 text-sm">2,000 RWF</span>
+              </label>
+
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-2xl p-3.5 flex items-center justify-between hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50/60">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="packageSize" value="4500" data-label="Bulk Mini-Van Load" class="accent-emerald-700 w-4 h-4" onchange="updateBookingPrice()">
+                  <div>
+                    <p class="font-bold text-sm text-slate-900">Bulk Mini-Van Load</p>
+                    <p class="text-xs text-slate-500">Multi-crate Daihatsu / Van slot</p>
+                  </div>
+                </div>
+                <span class="font-display font-extrabold text-emerald-800 text-sm">4,500 RWF</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Scheduled Run Slot -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-2">Choose Scheduled Departure Window *</label>
+            <div class="grid grid-cols-3 gap-3">
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-xl py-3 px-2 text-center hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-800 has-[:checked]:text-white">
+                <input type="radio" name="runSlot" value="10:00 AM" class="sr-only" checked>
+                <span class="block font-display font-bold text-sm sm:text-base">10:00 AM</span>
+                <span class="block text-[11px] opacity-80">Morning Run</span>
+              </label>
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-xl py-3 px-2 text-center hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-800 has-[:checked]:text-white">
+                <input type="radio" name="runSlot" value="1:00 PM" class="sr-only">
+                <span class="block font-display font-bold text-sm sm:text-base">1:00 PM</span>
+                <span class="block text-[11px] opacity-80">Midday Run</span>
+              </label>
+              <label class="cursor-pointer border-2 border-slate-200 bg-white rounded-xl py-3 px-2 text-center hover:border-emerald-600 transition has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-800 has-[:checked]:text-white">
+                <input type="radio" name="runSlot" value="4:00 PM" class="sr-only">
+                <span class="block font-display font-bold text-sm sm:text-base">4:00 PM</span>
+                <span class="block text-[11px] opacity-80">Afternoon Run</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Vendor & Recipient Details -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="vendorName" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Vendor / Shop Name *</label>
+              <input type="text" id="vendorName" required placeholder="e.g., Mama Aline Fresh Produce" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+            <div>
+              <label for="vendorPhone" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Vendor Phone (MoMo / SMS) *</label>
+              <input type="tel" id="vendorPhone" required placeholder="e.g., 0788 123 456" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+            <div>
+              <label for="recipientName" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Recipient Name *</label>
+              <input type="text" id="recipientName" required placeholder="e.g., Jean Bosco / Boutique Remera" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+            <div>
+              <label for="recipientLocation" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Exact Drop-off Landmark & Phone *</label>
+              <input type="text" id="recipientLocation" required placeholder="e.g., Kisimenti Corner, 0789 000 111" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+          </div>
+
+          <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
+            <div>
+              <span class="text-xs text-slate-500 block">Total Fixed Price (Pay via MoMo or Cash at Gate)</span>
+              <span id="formTotalDisplay" class="font-display text-2xl font-extrabold text-emerald-900">1,500 RWF</span>
+            </div>
+            <button type="submit" class="w-full sm:w-auto bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-7 py-4 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-qrcode text-amber-400"></i>
+              <span>Generate Demo Waybill</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Digital Waybill & QR Pass Output (5 cols) -->
+        <div class="lg:col-span-5">
+          <div id="waybillCard" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-slate-800 relative overflow-hidden">
+            <!-- Ticket Notch Decoration -->
+            <div class="flex items-center justify-between pb-4 border-b border-dashed border-slate-700">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span class="font-display font-bold text-sm uppercase tracking-wider text-emerald-400">Ripple Sample Waybill</span>
+              </div>
+              <span id="waybillStatusBadge" class="px-2.5 py-1 rounded-full bg-emerald-900/90 border border-emerald-600/50 text-emerald-300 text-xs font-semibold">
+                Sample Preview
+              </span>
+            </div>
+
+            <!-- QR Code Container -->
+            <div class="my-6 flex flex-col items-center justify-center bg-white rounded-2xl p-5 text-slate-900 shadow-inner">
+              <canvas id="qrCanvas" width="168" height="168" class="rounded-lg"></canvas>
+              <p id="waybillCodeText" class="font-mono font-bold text-base tracking-widest text-slate-900 mt-3">RPL-KGL-104</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">Decorative QR-style graphic only. It is not scannable.</p>
+            </div>
+
+            <!-- Waybill Details Summary -->
+            <div class="space-y-2.5 text-sm">
+              <div class="flex justify-between">
+                <span class="text-slate-400">Origin Hub:</span>
+                <span id="wbOrigin" class="font-semibold text-right">Kimironko Market (KG 145 St)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">Destination:</span>
+                <span id="wbDest" class="font-semibold text-right">Remera / Kimironko (Zone A)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">Departure Slot:</span>
+                <span id="wbSlot" class="font-semibold text-amber-400">10:00 AM Scheduled Run</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">Cargo Tier:</span>
+                <span id="wbSize" class="font-semibold">Medium Box / Bag</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">Sender / Recipient:</span>
+                <span id="wbParties" class="font-semibold text-right">Demo Vendor → Buyer</span>
+              </div>
+              <div class="flex justify-between pt-2.5 border-t border-slate-800 text-base">
+                <span class="text-slate-300 font-medium">Fixed Fare:</span>
+                <span id="wbPrice" class="font-display font-extrabold text-amber-400">1,500 RWF</span>
+              </div>
+            </div>
+
+            <!-- 1-Click WhatsApp Dispatch Button -->
+            <div class="mt-6 space-y-2.5">
+              <a id="whatsappDispatchBtn" href="https://wa.me/250726591807?text=Hello%20Ripple%20Rwanda%2C%20I%20would%20like%20to%20confirm%20booking%20RPL-KGL-104%20from%20Kimironko%20Market." target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-md">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Send booking request via WhatsApp</span>
+              </a>
+              <button type="button" onclick="copyBookingId()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-4 rounded-xl border border-slate-700 transition">
+                <i class="fa-regular fa-copy mr-1.5"></i> Copy Waybill ID to Track Below
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Live Delivery Tracker & QR Verification Demo -->
+  <section id="track-parcel" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200">
+        <div class="text-center max-w-xl mx-auto mb-8">
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Sample Interface · Not Live Tracking</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Preview the Sample Tracking Screen</h2>
+          <p class="text-sm text-slate-600 mt-2">
+            This tracker uses sample data stored only in this browser session. It is not connected to vehicles or live delivery events. Enter the sample ID (e.g., <button type="button" onclick="fillSampleTrack('RPL-KGL-104')" class="font-mono font-bold text-emerald-700 underline">RPL-KGL-104</button> or your newly generated code) to inspect scan timestamps.
+          </p>
+        </div>
+
+        <!-- Search Input -->
+        <div class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mb-8">
+          <input type="text" id="trackInput" value="RPL-KGL-104" placeholder="Enter Waybill ID (e.g. RPL-KGL-104)" class="flex-1 rounded-xl border border-slate-300 px-4 py-3.5 font-mono text-sm uppercase focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+          <button type="button" onclick="runTrackerSearch()" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Check Demo Status</span>
+          </button>
+        </div>
+
+        <!-- Tracking Timeline Output -->
+        <div id="trackerResult" class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200">
+            <div>
+              <span class="text-xs text-slate-500 block">Tracking Reference</span>
+              <span id="trackDisplayId" class="font-mono font-extrabold text-lg text-slate-900">RPL-KGL-104</span>
+            </div>
+            <span id="trackOverallStatus" class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+              Delivered & Photo Verified
+            </span>
+          </div>
+
+          <ol id="trackTimeline" class="relative border-l-2 border-emerald-600 ml-3 space-y-6">
+            <li class="ml-6">
+              <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
+                <i class="fa-solid fa-check"></i>
+              </span>
+              <h4 class="font-bold text-sm text-slate-900">1. Booking Confirmed via QR Stand</h4>
+              <p class="text-xs text-slate-500">09:38 AM • Kimironko Market Gate (KG 145 St) • Fixed Fare: 1,500 RWF</p>
+            </li>
+            <li class="ml-6">
+              <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
+                <i class="fa-solid fa-check"></i>
+              </span>
+              <h4 class="font-bold text-sm text-slate-900">2. Scanned & Sealed at Consolidation Point</h4>
+              <p class="text-xs text-slate-500">09:55 AM • Assigned to Vetted Partner Rider (FERWACOTAMO #RW-412)</p>
+            </li>
+            <li class="ml-6">
+              <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
+                <i class="fa-solid fa-check"></i>
+              </span>
+              <h4 class="font-bold text-sm text-slate-900">3. Departed on 10:00 AM Scheduled Corridor Run</h4>
+              <p class="text-xs text-slate-500">10:02 AM • En route Kimironko → Kisimenti → Kacyiru</p>
+            </li>
+            <li class="ml-6">
+              <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-amber-500 rounded-full ring-4 ring-white text-slate-950 text-[10px]">
+                <i class="fa-solid fa-camera"></i>
+              </span>
+              <h4 class="font-bold text-sm text-slate-900">4. Delivered & Recipient QR Scanned</h4>
+              <p class="text-xs text-slate-500">10:29 AM • Signed off by recipient at Kisimenti • SMS receipt sent to vendor</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Partners & Riders ("Drive or Partner With Ripple") -->
+  <section id="partners" class="py-16 sm:py-20 bg-emerald-950 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Ecosystem & Pilot Partnerships</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-extrabold mt-2">Drive or Partner With Ripple Rwanda</h2>
+        <p class="text-emerald-200 mt-3 text-sm sm:text-base">
+          We work hand-in-hand with market cooperatives, FERWACOTAMO-affiliated moto riders, and cargo mini-van operators across Kigali.
+        </p>
+      </div>
+
+      <!-- 3 Partner Cards -->
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <!-- Market Vendors -->
+        <div class="bg-emerald-900/60 border border-emerald-700/70 rounded-3xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <span class="text-xs font-bold uppercase text-amber-400">Pilot Starting Dec 7, 2026</span>
+            <h3 class="font-display font-bold text-xl mt-1 mb-3">Market Vendors & Cooperatives</h3>
+            <p class="text-sm text-emerald-100/90 leading-relaxed mb-4">
+              Join our 4-week Kimironko Market pilot cohort. Cut delivery costs by 40–60% vs. private car hires and serve more off-site customers daily.
+            </p>
+          </div>
+          <button type="button" onclick="selectPartnerRole('Market Vendor / Cooperative')" class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition">
+            Join Vendor Pilot List
+          </button>
+        </div>
+
+        <!-- Moto-Taxi Riders -->
+        <div class="bg-emerald-900/60 border border-emerald-700/70 rounded-3xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-motorcycle"></i>
+            </div>
+            <span class="text-xs font-bold uppercase text-emerald-300">FERWACOTAMO Affiliates</span>
+            <h3 class="font-display font-bold text-xl mt-1 mb-3">Moto-Taxi Riders</h3>
+            <p class="text-sm text-emerald-100/90 leading-relaxed mb-4">
+              Turn slow midday hours (10:00–16:00) into guaranteed, pre-bundled multi-parcel runs with zero idle waiting and instant Mobile Money payouts.
+            </p>
+          </div>
+          <button type="button" onclick="selectPartnerRole('Moto-Taxi Rider (FERWACOTAMO)')" class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition">
+            Apply as Partner Rider
+          </button>
+        </div>
+
+        <!-- Cargo Vans & Light Trucks -->
+        <div class="bg-emerald-900/60 border border-emerald-700/70 rounded-3xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-truck-pickup"></i>
+            </div>
+            <span class="text-xs font-bold uppercase text-amber-400">Kimironko Cargo Bay</span>
+            <h3 class="font-display font-bold text-xl mt-1 mb-3">Cargo Vans & Light Trucks</h3>
+            <p class="text-sm text-emerald-100/90 leading-relaxed mb-4">
+              Own a Daihatsu or mini-van? Partner with Ripple for scheduled bulk wholesale runs across Gasabo, Nyarugenge, and Kicukiro.
+            </p>
+          </div>
+          <button type="button" onclick="selectPartnerRole('Cargo Van / Daihatsu Owner')" class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition">
+            Register Fleet Vehicle
+          </button>
+        </div>
+      </div>
+
+      <!-- Partner Inquiry Form -->
+      <div class="max-w-2xl mx-auto bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl">
+        <h3 class="font-display font-bold text-xl text-slate-900 mb-1">Partner & Pilot Onboarding Form</h3>
+        <p class="text-xs sm:text-sm text-slate-500 mb-5">This prototype has no registration database. Submit the form to open WhatsApp with your enquiry details.</p>
+        
+        <form id="partnerForm" onsubmit="handlePartnerSubmit(event)" class="space-y-4">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Full Name / Cooperative *</label>
+              <input type="text" id="partnerName" required placeholder="e.g., Jean Claude Habimana" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
+              <input type="tel" id="partnerPhone" required placeholder="e.g., 0788 000 000" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Partner Category *</label>
+              <select id="partnerRole" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm bg-white focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+                <option value="Market Vendor / Cooperative">Market Vendor / Cooperative</option>
+                <option value="Moto-Taxi Rider (FERWACOTAMO)">Moto-Taxi Rider (FERWACOTAMO)</option>
+                <option value="Cargo Van / Daihatsu Owner">Cargo Van / Daihatsu Owner</option>
+                <option value="Market Administration / Institution">Market Administration / Institution</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Primary Market / Base</label>
+              <input type="text" id="partnerLocation" placeholder="e.g., Kimironko Market Gate 2" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow transition">
+            Send Partner Enquiry via WhatsApp
+          </button>
+        </form>
+        <div id="partnerSuccessMsg" class="hidden mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm font-medium">
+          <i class="fa-solid fa-circle-check text-emerald-700 mr-1.5"></i>
+          Your enquiry has not been saved on this website. Please send the WhatsApp message to contact the team at <strong>+250 726 591 807</strong>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: About & Team Ripple -->
+  <section id="about" class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-center mb-14">
+        <div class="lg:col-span-6 space-y-4">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
+            <i class="fa-solid fa-rocket text-amber-500"></i>
+            Future Makers Kigali Programme
+          </span>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900">Building Reliable Urban Logistics for Rwanda</h2>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Ripple Rwanda is presented here as an asset-light logistics concept intended to help small business owners and market vendors plan deliveries without owning vehicles or relying on unpredictable solo transport fees. Pilot partnerships and operating arrangements should be confirmed before launch.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2 text-sm text-slate-700">
+            <span class="inline-flex items-center gap-2"><i class="fa-solid fa-location-dot text-emerald-700"></i> Kigali, Rwanda</span>
+            <span class="inline-flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-700"></i> +250 726 591 807</span>
+            <span class="inline-flex items-center gap-2"><i class="fa-solid fa-envelope text-emerald-700"></i> ripplerwanda01@gmail.com</span>
+          </div>
+        </div>
+
+        <!-- Team Grid -->
+        <div class="lg:col-span-6">
+          <h3 class="font-display font-bold text-lg text-slate-900 mb-4">Meet the Founding Team</h3>
+          <div class="grid sm:grid-cols-2 gap-3.5">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-full bg-emerald-800 text-white font-display font-bold flex items-center justify-center shrink-0">IM</div>
+              <div>
+                <p class="font-bold text-sm text-slate-900">Ishami Miracle</p>
+                <p class="text-xs text-emerald-700 font-medium">Team Lead</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-full bg-emerald-700 text-white font-display font-bold flex items-center justify-center shrink-0">NJ</div>
+              <div>
+                <p class="font-bold text-sm text-slate-900">Ndatimana Jean de Dieu</p>
+                <p class="text-xs text-emerald-700 font-medium">Product & Tech</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-full bg-amber-500 text-slate-950 font-display font-bold flex items-center justify-center shrink-0">UA</div>
+              <div>
+                <p class="font-bold text-sm text-slate-900">Uwera Ange Micheline</p>
+                <p class="text-xs text-emerald-700 font-medium">Partnerships & Strategy</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-full bg-slate-800 text-white font-display font-bold flex items-center justify-center shrink-0">JK</div>
+              <div>
+                <p class="font-bold text-sm text-slate-900">Jesse Kiguta</p>
+                <p class="text-xs text-emerald-700 font-medium">Operations & Records</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5 sm:col-span-2">
+              <div class="w-11 h-11 rounded-full bg-emerald-900 text-amber-400 font-display font-bold flex items-center justify-center shrink-0">KM</div>
+              <div>
+                <p class="font-bold text-sm text-slate-900">Kevine Musanase</p>
+                <p class="text-xs text-emerald-700 font-medium">Fleet & Carrier Relations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-8 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-800 flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 27V9H17.5C20.5376 9 23 11.4624 23 14.5C23 17.5376 20.5376 20 17.5 20H9" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16.5 20L22.5 27" stroke="#F59E0B" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M26 11C28.2 13.2 28.2 16.8 26 19" stroke="#F59E0B" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-display font-extrabold text-lg text-white">Ripple Rwanda</span>
+            <p class="text-xs text-slate-400">Incubated at Westerwelle Startup Haus Kigali • Future Makers Kigali</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-5 text-sm">
+          <a href="https://wa.me/250726591807" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-emerald-400"></i> +250 726 591 807
+          </a>
+          <a href="mailto:ripplerwanda01@gmail.com" class="hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-solid fa-envelope text-amber-400"></i> ripplerwanda01@gmail.com
+          </a>
+          <a href="https://instagram.com/ripplerw1" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-brands fa-instagram text-pink-400"></i> @ripplerw1
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs gap-3">
+        <p>© 2026 Ripple Rwanda. All rights reserved. Kigali, Rwanda.</p>
+        <p class="text-slate-500">Scheduled Runs: 10:00 AM • 1:00 PM • 4:00 PM | Kimironko Pilot Hub (KG 145 St)</p>
+      </div>
+    </div>
+  <div class="max-w-7xl mx-auto px-4 text-xs text-slate-500 mt-3">Ripple Rwanda is shown as a concept prototype. Prices, routes, launch dates, partners and service availability are proposed details and must be confirmed with the team. This website does not provide live booking, payment, parcel tracking or QR verification.</div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick Action Button -->
+  <a href="https://wa.me/250726591807?text=Muraho%20Ripple%20Rwanda!%20Ndashaka%20kohereza%20imizigo%20muri%20Kigali." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="fixed bottom-5 right-5 z-40 bg-[#25D366] hover:bg-[#1ebe5d] text-slate-950 font-bold px-4 py-3.5 rounded-full shadow-2xl flex items-center gap-2 transition transform hover:scale-105">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+    <span class="hidden sm:inline text-sm">Book via WhatsApp</span>
+  </a>
+
+  <!-- Toast Notification Banner (Replaces alert()) -->
+  <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 text-sm font-medium flex items-center gap-2.5">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toastMessage">Action completed</span>
+  </div>
+
+  <!-- Kimironko Market Station Pass Modal -->
+  <div id="stationPassModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl relative">
+      <button onclick="closeStationPassModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center">
+        <span class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
+          Kimironko Market Gate Stand
+        </span>
+        <h3 class="font-display text-xl font-extrabold text-slate-900">Station Quick-Scan Pass</h3>
+        <p class="text-xs text-slate-500 mt-1">KG 145 St Consolidation Point • Departures: 10:00, 13:00, 16:00</p>
+
+        <div class="my-5 bg-slate-50 border-2 border-dashed border-emerald-600/50 rounded-2xl p-5 flex flex-col items-center">
+          <canvas id="stationQrCanvas" width="160" height="160"></canvas>
+          <span class="font-mono font-bold text-sm text-emerald-900 mt-3">HUB: KGL-KIMIRONKO-01</span>
+          <span class="text-[11px] text-slate-500">USSD Offline Code: *801*77# (Pilot)</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <a href="#book-run" onclick="closeStationPassModal()" class="bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition">
+            Book Online Now
+          </a>
+          <a href="https://wa.me/250726591807?text=Hi%20Ripple%2C%20I%20am%20at%20Kimironko%20Market%20Gate%20(KG%20145%20St)%20and%20want%20to%20book%20a%20parcel%20run." target="_blank" rel="noopener noreferrer" class="bg-[#25D366] text-slate-950 font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition">
+            WhatsApp Gate Agent
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application JavaScript -->
+  <script>
+    // Bilingual Dictionary (English & Kinyarwanda)
+    const translations = {
+      en: {
+        topBanner: "Planned Kimironko pilot: 7 December 2026 • Proposed scheduled runs at 10:00, 13:00 & 16:00",
+        navWhy: "Why Ripple",
+        navHow: "How It Works",
+        navBook: "Pricing & Booking",
+        navTrack: "Track QR",
+        navPartners: "Riders & Partners",
+        navAbout: "About",
+        navCta: "Book Delivery",
+        heroBadge: "Built for Kigali Market Vendors & Boutiques",
+        heroHeadline: "A simpler way to plan cargo delivery across Kigali",
+        heroSubheadline: "Ripple Rwanda is a proposed scheduled-delivery service for market vendors and small businesses. This interactive page demonstrates how parcel requests could work. Proposed runs are at 10:00 AM, 1:00 PM, and 4:00 PM via the web and WhatsApp. The booking and tracking screens below are demonstrations, not a live dispatch system.",
+        heroCtaPrimary: "Book a Scheduled Run",
+        heroCtaQr: "Kimironko Gate QR Pass",
+        statStarting: "Starting fixed rate",
+        statRuns: "10:00 • 13:00 • 16:00",
+        statProof: "Sample waybill display"
+      },
+      rw: {
+        topBanner: "Igerageza rya Kimironko Ritangira 7 Ukuboza 2026 • Ingendo ku Masaha Azwi: 10:00, 13:00 & 16:00",
+        navWhy: "Impamvu ya Ripple",
+        navHow: "Uko Bikora",
+        navBook: "Ibiciro & Gutumiza",
+        navTrack: "Kurikirana QR",
+        navPartners: "Abamotari & Abafatanyabikorwa",
+        navAbout: "Twebwe",
+        navCta: "Ohereza Umutwaro",
+        heroBadge: "Byagenewe Abacuruzi b'Isoko n'Amaduka i Kigali",
+        heroHeadline: "Gutwara Imizigo ku Gihe, ku Giciro Kizwi kandi mu Mutekano i Kigali",
+        heroSubheadline: "Nta kongera guciririkanya cyangwa kwangirika kw'ibicuruzwa. Ohereza imizigo saa 4:00 za mu gitondo (10:00), saa 7:00 (13:00), na saa 10:00 (16:00) ukoresheje QR Code, WhatsApp, cyangwa SMS.",
+        heroCtaPrimary: "Ohereza Umutwaro Nonaha",
+        heroCtaQr: "Ikarita ya QR ya Kimironko",
+        statStarting: "Igiciro gihera kuri",
+        statRuns: "10:00 • 13:00 • 16:00",
+        statProof: "Icyemezo cya QR scan"
+      }
+    };
+
+    let currentLang = 'en';
+
+    // Store bookings in memory for instant tracking demo
+    const bookingsDB = {
+      "RPL-KGL-104": {
+        id: "RPL-KGL-104",
+        origin: "Kimironko Market (KG 145 St)",
+        dest: "Remera / Kimironko / Bibare (Zone A)",
+        slot: "10:00 AM",
+        size: "Medium Box / Bag",
+        price: "1,500 RWF",
+        vendor: "Mama Aline Fresh Produce",
+        recipient: "Kisimenti Buyer",
+        status: "Delivered & Photo Verified",
+        isCustom: false
+      }
+    };
+
+    // Toggle EN / RW language
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'rw' : 'en';
+      const dict = translations[currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+      document.getElementById('langLabel').textContent = currentLang === 'en' ? 'EN / RW' : 'RW / EN';
+      showToast(currentLang === 'rw' ? 'Ururimi rwahinduwe mu Kinyarwanda' : 'Language switched to English');
+    }
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Decorative QR-style illustration only; this is NOT a standards-compliant or scannable QR code.
+    function renderQRCode(canvasId, text) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+      const cells = 21;
