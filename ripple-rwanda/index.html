@@ -853,6 +853,9 @@
         </div>
 
         <div class="flex flex-wrap gap-5 text-sm">
+          <a href="https://script.google.com/macros/s/AKfycbwZRPSoIpqqS4Sty8fnTBXmKM9D4wfNKWrgV7lDRCOv6WK_S08FwD2duLHI5jiPQtleXg/exec?view=whatsapp" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center gap-1.5">
+            <i class="fa-solid fa-clipboard-list text-amber-400"></i> Staff WhatsApp Intake
+          </a>
           <a href="https://wa.me/250726591807" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center gap-1.5">
             <i class="fa-brands fa-whatsapp text-emerald-400"></i> +250 726 591 807
           </a>
@@ -870,7 +873,7 @@
         <p class="text-slate-500">Scheduled Runs: 10:00 AM • 1:00 PM • 4:00 PM | Kimironko Pilot Hub (KG 145 St)</p>
       </div>
     </div>
-  <div class="max-w-7xl mx-auto px-4 text-xs text-slate-500 mt-3">Ripple Rwanda is shown as a concept prototype. Prices, routes, launch dates, partners and service availability are proposed details and must be confirmed with the team. This website does not provide live booking, payment, parcel tracking or QR verification.</div>
+  <div class="max-w-7xl mx-auto px-4 text-xs text-slate-500 mt-3">Ripple Rwanda is shown as a concept prototype. Prices, routes, launch dates, partners and service availability are proposed details and must be confirmed with the team. This website does not provide live dispatch, payment processing, parcel tracking or QR verification. Staff can record WhatsApp enquiries in the protected intake portal after the updated Apps Script is deployed.</div>
   </footer>
 
   <!-- Floating WhatsApp Quick Action Button -->
@@ -1107,8 +1110,11 @@
             size: sizeLabel,
             fare: priceFormatted,
             vendor: vendor,
+            phone: vendorPhone,
             rec: recipient,
-            drop: recipientLoc
+            drop: recipientLoc,
+            source: 'Website',
+            status: 'New - needs manual confirmation'
           })
         });
         // no-cors responses are opaque; the sheet must be checked to confirm the row arrived.
