@@ -159,7 +159,7 @@
           </h1>
 
           <p class="text-base sm:text-lg text-emerald-100/90 max-w-2xl leading-relaxed" data-i18n="heroSubheadline">
-            Ripple Rwanda is a proposed scheduled-delivery service for market vendors and small businesses. This interactive page demonstrates how parcel requests could work. Proposed runs are at <strong class="text-white">10:00 AM, 1:00 PM, and 4:00 PM</strong> via the web and WhatsApp. The booking and tracking screens below are demonstrations, not a live dispatch system.
+            Ripple Rwanda is a proposed scheduled-delivery service for market vendors and small businesses. This interactive page demonstrates how parcel requests could work. Proposed runs are at 10:00 AM, 1:00 PM, and 4:00 PM via the web and WhatsApp. The booking and tracking screens below are demonstrations, not a live dispatch system.
           </p>
 
           <!-- Primary Hero CTAs -->
@@ -394,7 +394,7 @@
 
       <div class="grid lg:grid-cols-12 gap-8 items-start">
         <!-- Booking Form (7 cols) -->
-        <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="lg:col-span-7 bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <form id="bookingForm" autocomplete="on" onsubmit="handleBookingSubmit(event)" class="lg:col-span-7 bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
               <label for="pickupHub" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1.5">Pickup Market / Hub *</label>
@@ -494,19 +494,19 @@
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label for="vendorName" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Vendor / Shop Name *</label>
-              <input type="text" id="vendorName" required placeholder="e.g., Mama Aline Fresh Produce" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="text" id="vendorName" name="vendorName" maxlength="80" autocomplete="organization" required placeholder="e.g., Mama Aline Fresh Produce" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
             <div>
               <label for="vendorPhone" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Vendor Phone (MoMo / SMS) *</label>
-              <input type="tel" id="vendorPhone" required placeholder="e.g., 0788 123 456" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="tel" id="vendorPhone" name="vendorPhone" maxlength="20" inputmode="tel" autocomplete="tel" required placeholder="e.g., 0788 123 456" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
             <div>
               <label for="recipientName" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Recipient Name *</label>
-              <input type="text" id="recipientName" required placeholder="e.g., Jean Bosco / Boutique Remera" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="text" id="recipientName" name="recipientName" maxlength="80" autocomplete="name" required placeholder="e.g., Jean Bosco / Boutique Remera" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
             <div>
               <label for="recipientLocation" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Exact Drop-off Landmark & Phone *</label>
-              <input type="text" id="recipientLocation" required placeholder="e.g., Kisimenti Corner, 0789 000 111" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="text" id="recipientLocation" name="recipientLocation" maxlength="120" required placeholder="e.g., Kisimenti Corner, 0789 000 111" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
           </div>
 
@@ -609,7 +609,7 @@
         </div>
 
         <!-- Tracking Timeline Output -->
-        <div id="trackerResult" class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+        <div id="trackerResult" class="bg-slate-50 rounded-2xl p-6 border border-slate-200" aria-live="polite">
           <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200">
             <div>
               <span class="text-xs text-slate-500 block">Tracking Reference</span>
@@ -723,17 +723,17 @@
       <!-- Partner Inquiry Form -->
       <div class="max-w-2xl mx-auto bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl">
         <h3 class="font-display font-bold text-xl text-slate-900 mb-1">Partner & Pilot Onboarding Form</h3>
-        <p class="text-xs sm:text-sm text-slate-500 mb-5">This prototype has no registration database. Submit the form to open WhatsApp with your enquiry details.</p>
+        <p class="text-xs sm:text-sm text-slate-500 mb-5">This prototype does not store partner registrations. Your details are included in a WhatsApp message only when you submit the form.</p>
         
         <form id="partnerForm" onsubmit="handlePartnerSubmit(event)" class="space-y-4">
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Full Name / Cooperative *</label>
-              <input type="text" id="partnerName" required placeholder="e.g., Jean Claude Habimana" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="text" id="partnerName" name="partnerName" maxlength="100" autocomplete="name" required placeholder="e.g., Jean Claude Habimana" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
-              <input type="tel" id="partnerPhone" required placeholder="e.g., 0788 000 000" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="tel" id="partnerPhone" name="partnerPhone" maxlength="20" inputmode="tel" autocomplete="tel" required placeholder="e.g., 0788 000 000" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
           </div>
 
@@ -749,7 +749,7 @@
             </div>
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">Primary Market / Base</label>
-              <input type="text" id="partnerLocation" placeholder="e.g., Kimironko Market Gate 2" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
+              <input type="text" id="partnerLocation" name="partnerLocation" maxlength="100" placeholder="e.g., Kimironko Market Gate 2" class="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-sm focus:ring-2 focus:ring-emerald-700 focus:outline-none">
             </div>
           </div>
 
@@ -880,7 +880,7 @@
   </a>
 
   <!-- Toast Notification Banner (Replaces alert()) -->
-  <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 text-sm font-medium flex items-center gap-2.5">
+  <div id="toastNotification" role="status" aria-live="polite" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-slate-700 text-sm font-medium flex items-center gap-2.5">
     <i class="fa-solid fa-circle-check text-emerald-400"></i>
     <span id="toastMessage">Action completed</span>
   </div>
@@ -1082,9 +1082,12 @@
       const recipient = document.getElementById('recipientName').value.trim();
       const recipientLoc = document.getElementById('recipientLocation').value.trim();
 
-      // Generate unique booking code
-      const randomDigits = Math.floor(100 + Math.random() * 900);
-      const bookingId = `DEMO-RPL-${randomDigits}`;
+      // Generate a less collision-prone demo reference. This is not a server booking ID.
+      let bookingId;
+      do {
+        const randomDigits = Math.floor(100000 + Math.random() * 900000);
+        bookingId = `DEMO-RPL-${randomDigits}`;
+      } while (bookingsDB[bookingId]);
 
       // Save to local tracker DB
       bookingsDB[bookingId] = {
@@ -1135,16 +1138,28 @@
       document.getElementById('waybillCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // Copy Booking ID using execCommand fallback
-    function copyBookingId() {
+    // Copy the reference with the modern Clipboard API and a legacy fallback.
+    async function copyBookingId() {
       const code = document.getElementById('waybillCodeText').textContent;
-      const tempInput = document.createElement('input');
-      tempInput.value = code;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      showToast(`Copied ${code} to clipboard`);
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(code);
+        } else {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = code;
+          tempInput.setAttribute('readonly', '');
+          tempInput.style.position = 'fixed';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          const copied = document.execCommand('copy');
+          tempInput.remove();
+          if (!copied) throw new Error('Copy command was not accepted');
+        }
+        showToast(`Copied ${code} to clipboard`);
+      } catch (error) {
+        showToast('Copy was blocked. Please select the reference and copy it manually.');
+      }
     }
 
     // Escape untrusted form values before placing them in HTML templates.
