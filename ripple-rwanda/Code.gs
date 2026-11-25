@@ -55,7 +55,7 @@ function saveWhatsAppBooking(payload) {
 }
 
 function saveBooking_(payload, defaultSource) {
-  const phone = clean_(payload.phone || payload.vendorPhone || '', 30);
+  const phone = normalizePhone_(clean_(payload.phone || payload.vendorPhone || '', 30));
   if (!phone) throw new Error('Customer phone number is required.');
   const name = clean_(payload.vendor || payload.name || '', 100);
   if (!name) throw new Error('Customer name is required.');
@@ -153,6 +153,14 @@ function upsertCustomer_(sheet, customerId, phone, name, now) {
     sheet.getRange(rowNumber, lastCol).setValue(now);
     sheet.getRange(rowNumber, countCol).setValue(Number(sheet.getRange(rowNumber, countCol).getValue() || 0) + 1);
   }
+}
+
+function normalizePhone_(phone) {
+  let digits = String(phone || '').replace(/[^0-9]/g, '');
+  if (digits.startsWith('00')) digits = digits.slice(2);
+  if (digits.startsWith('0') && digits.length === 10) digits = '250' + digits.slice(1);
+  else if (digits.length === 9 && digits.startsWith('7')) digits = '250' + digits;
+  return digits ? '+' + digits : '';
 }
 
 function customerIdForPhone_(phone) {
