@@ -959,6 +959,9 @@
       }
     };
 
+    // Google Apps Script endpoint for saving booking requests to the Ripple Bookings sheet.
+    const BOOKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbwZRPSoIpqqS4Sty8fnTBXmKM9D4wfNKWrgV7lDRCOv6WK_S08FwD2duLHI5jiPQtleXg/exec";
+
     let currentLang = 'en';
 
     // Store bookings in memory for instant tracking demo
@@ -1067,7 +1070,7 @@
     }
 
     // Generate Booking & Digital QR Waybill
-    function handleBookingSubmit(e) {
+    async function handleBookingSubmit(e) {
       e.preventDefault();
 
       const origin = document.getElementById('pickupHub').value;
@@ -1088,6 +1091,31 @@
         const randomDigits = Math.floor(100000 + Math.random() * 900000);
         bookingId = `DEMO-RPL-${randomDigits}`;
       } while (bookingsDB[bookingId]);
+
+      // Send booking details to the Google Sheet. The Apps Script endpoint accepts a simple text/plain POST.
+      let sheetRequestSent = false;
+      try {
+        await fetch(BOOKING_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            id: bookingId,
+            hub: origin,
+            zone: dest,
+            slot: slot,
+            size: sizeLabel,
+            fare: priceFormatted,
+            vendor: vendor,
+            rec: recipient,
+            drop: recipientLoc
+          })
+        });
+        // no-cors responses are opaque; the sheet must be checked to confirm the row arrived.
+        sheetRequestSent = true;
+      } catch (error) {
+        console.error('Ripple booking sheet submission failed:', error);
+      }
 
       // Save to local tracker DB
       bookingsDB[bookingId] = {
@@ -1134,7 +1162,7 @@
       document.getElementById('trackInput').value = bookingId;
       runTrackerSearch();
 
-      showToast(`Demo reference ${bookingId} created. Send the WhatsApp request for manual confirmation.`);
+      showToast(sheetRequestSent ? `Booking request sent to the sheet. Check Ripple Bookings to confirm it was recorded. Send the WhatsApp request for manual confirmation.` : `Demo reference ${bookingId} created locally. Sheet submission failed; use WhatsApp for manual confirmation.`);
       document.getElementById('waybillCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
