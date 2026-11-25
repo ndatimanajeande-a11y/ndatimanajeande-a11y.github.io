@@ -998,3 +998,268 @@
       const ctx = canvas.getContext('2d');
       const size = canvas.width;
       const cells = 21;
+      const cellSize = Math.floor(size / cells);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, size, size);
+
+      // Simple hash seed from text
+      let seed = 0;
+      for (let i = 0; i < text.length; i++) {
+        seed = (seed * 31 + text.charCodeAt(i)) % 9973;
+      }
+
+      function drawFinderPattern(x, y) {
+        ctx.fillStyle = '#064E3B';
+        ctx.fillRect(x * cellSize, y * cellSize, 7 * cellSize, 7 * cellSize);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect((x + 1) * cellSize, (y + 1) * cellSize, 5 * cellSize, 5 * cellSize);
+        ctx.fillStyle = '#064E3B';
+        ctx.fillRect((x + 2) * cellSize, (y + 2) * cellSize, 3 * cellSize, 3 * cellSize);
+      }
+
+      // Draw data modules
+      for (let r = 0; r < cells; r++) {
+        for (let c = 0; c < cells; c++) {
+          // Skip finder pattern corners
+          if ((r < 8 && c < 8) || (r < 8 && c >= cells - 8) || (r >= cells - 8 && c < 8)) {
+            continue;
+          }
+          seed = (seed * 16807 + r * 17 + c * 31) % 2147483647;
+          if (seed % 3 !== 0) {
+            ctx.fillStyle = (r + c) % 7 === 0 ? '#047857' : '#0F172A';
+            ctx.fillRect(c * cellSize, r * cellSize, cellSize - 1, cellSize - 1);
+          }
+        }
+      }
+
+      // Three QR finder corners
+      drawFinderPattern(0, 0);
+      drawFinderPattern(cells - 7, 0);
+      drawFinderPattern(0, cells - 7);
+    }
+
+    // Sync Hero Quick Estimator with Main Booking Form
+    function syncHeroToMain() {
+      const hub = document.getElementById('heroHub').value;
+      const dest = document.getElementById('heroDest').value;
+      const sizeVal = document.getElementById('heroSize').value;
+      const slotVal = document.getElementById('heroSlot').value;
+
+      document.getElementById('heroPriceDisplay').textContent = Number(sizeVal).toLocaleString() + ' RWF';
+
+      document.getElementById('pickupHub').value = hub;
+      document.getElementById('destZone').value = dest;
+
+      const sizeRadio = document.querySelector(`input[name="packageSize"][value="${sizeVal}"]`);
+      if (sizeRadio) sizeRadio.checked = true;
+
+      const slotRadio = document.querySelector(`input[name="runSlot"][value="${slotVal}"]`);
+      if (slotRadio) slotRadio.checked = true;
+
+      updateBookingPrice();
+    }
+
+    // Update Main Booking Form Price Display
+    function updateBookingPrice() {
+      const selectedSize = document.querySelector('input[name="packageSize"]:checked');
+      const price = selectedSize ? Number(selectedSize.value) : 1500;
+      document.getElementById('formTotalDisplay').textContent = price.toLocaleString() + ' RWF';
+    }
+
+    // Generate Booking & Digital QR Waybill
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+
+      const origin = document.getElementById('pickupHub').value;
+      const dest = document.getElementById('destZone').value;
+      const sizeInput = document.querySelector('input[name="packageSize"]:checked');
+      const priceNum = Number(sizeInput.value);
+      const priceFormatted = priceNum.toLocaleString() + ' RWF';
+      const sizeLabel = sizeInput.getAttribute('data-label');
+      const slot = document.querySelector('input[name="runSlot"]:checked').value;
+      const vendor = document.getElementById('vendorName').value.trim();
+      const vendorPhone = document.getElementById('vendorPhone').value.trim();
+      const recipient = document.getElementById('recipientName').value.trim();
+      const recipientLoc = document.getElementById('recipientLocation').value.trim();
+
+      // Generate unique booking code
+      const randomDigits = Math.floor(100 + Math.random() * 900);
+      const bookingId = `DEMO-RPL-${randomDigits}`;
+
+      // Save to local tracker DB
+      bookingsDB[bookingId] = {
+        id: bookingId,
+        origin,
+        dest,
+        slot,
+        size: sizeLabel,
+        price: priceFormatted,
+        vendor,
+        recipient: `${recipient} (${recipientLoc})`,
+        status: "Demo created in this browser only • Not a confirmed booking",
+        isCustom: true
+      };
+
+      // Update Waybill Card
+      document.getElementById('waybillStatusBadge').textContent = 'Demo Only';
+      document.getElementById('waybillStatusBadge').className = 'px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 text-xs font-bold';
+      document.getElementById('waybillCodeText').textContent = bookingId;
+      document.getElementById('wbOrigin').textContent = origin;
+      document.getElementById('wbDest').textContent = dest;
+      document.getElementById('wbSlot').textContent = `${slot} Scheduled Run`;
+      document.getElementById('wbSize').textContent = sizeLabel;
+      document.getElementById('wbParties').textContent = `${vendor} → ${recipient}`;
+      document.getElementById('wbPrice').textContent = priceFormatted;
+
+      // Render fresh QR code
+      renderQRCode('qrCanvas', bookingId);
+
+      // Update WhatsApp Dispatch link
+      const waText = encodeURIComponent(
+        `Hello Ripple Rwanda! New Booking:\n` +
+        `• Waybill ID: ${bookingId}\n` +
+        `• Origin: ${origin}\n` +
+        `• Destination: ${dest}\n` +
+        `• Slot: ${slot}\n` +
+        `• Package: ${sizeLabel} (${priceFormatted})\n` +
+        `• Vendor: ${vendor} (${vendorPhone})\n` +
+        `• Recipient: ${recipient} - ${recipientLoc}`
+      );
+      document.getElementById('whatsappDispatchBtn').href = `https://wa.me/250726591807?text=${waText}`;
+
+      // Pre-fill tracker input with new ID
+      document.getElementById('trackInput').value = bookingId;
+      runTrackerSearch();
+
+      showToast(`Demo reference ${bookingId} created. Send the WhatsApp request for manual confirmation.`);
+      document.getElementById('waybillCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Copy Booking ID using execCommand fallback
+    function copyBookingId() {
+      const code = document.getElementById('waybillCodeText').textContent;
+      const tempInput = document.createElement('input');
+      tempInput.value = code;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast(`Copied ${code} to clipboard`);
+    }
+
+    // Live Tracker Logic
+    function fillSampleTrack(id) {
+      document.getElementById('trackInput').value = id;
+      runTrackerSearch();
+    }
+
+    function runTrackerSearch() {
+      const rawId = document.getElementById('trackInput').value.trim().toUpperCase();
+      const record = bookingsDB[rawId];
+      const displayId = document.getElementById('trackDisplayId');
+      const statusBadge = document.getElementById('trackOverallStatus');
+      const timeline = document.getElementById('trackTimeline');
+
+      if (!rawId) return;
+
+      if (record && record.isCustom) {
+        displayId.textContent = record.id;
+        statusBadge.textContent = 'Demo only • not confirmed';
+        statusBadge.className = 'px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold';
+        timeline.innerHTML = `
+          <li class="ml-6">
+            <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-emerald-700 rounded-full ring-4 ring-white text-white text-[10px]">
+              <i class="fa-solid fa-check"></i>
+            </span>
+            <h4 class="font-bold text-sm text-slate-900">1. Demo waybill created (${record.slot} run)</h4>
+            <p class="text-xs text-slate-500">Just now • Origin: ${record.origin} • Fixed Fare: ${record.price}</p>
+          </li>
+          <li class="ml-6">
+            <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-amber-500 rounded-full ring-4 ring-white text-slate-950 text-[10px] animate-pulse">
+              <i class="fa-solid fa-qrcode"></i>
+            </span>
+            <h4 class="font-bold text-sm text-slate-900">2. Awaiting manual confirmation at ${record.origin}</h4>
+            <p class="text-xs text-slate-500">Contact the team to confirm availability before ${record.slot}</p>
+          </li>
+          <li class="ml-6 opacity-50">
+            <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-slate-300 rounded-full ring-4 ring-white text-white text-[10px]">3</span>
+            <h4 class="font-bold text-sm text-slate-700">3. Scheduled Corridor Transit to ${record.dest}</h4>
+            <p class="text-xs text-slate-500">Illustrative route only • no carrier has been assigned</p>
+          </li>
+          <li class="ml-6 opacity-50">
+            <span class="absolute -left-2.5 flex items-center justify-center w-5 h-5 bg-slate-300 rounded-full ring-4 ring-white text-white text-[10px]">4</span>
+            <h4 class="font-bold text-sm text-slate-700">4. Recipient handover (proposed workflow)</h4>
+            <p class="text-xs text-slate-500">Proposed recipient: ${record.recipient}</p>
+          </li>
+        `;
+      } else if (rawId === 'RPL-KGL-104') {
+        // Sample record only. It is illustrative, not a live shipment.
+        displayId.textContent = rawId;
+        statusBadge.textContent = 'Sample Demo Record';
+        statusBadge.className = 'px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold';
+        timeline.innerHTML = `
+          <li class="ml-6"><h4 class="font-bold text-sm text-slate-900">1. Sample booking created</h4><p class="text-xs text-slate-500">Illustrative event only • Kimironko Market</p></li>
+          <li class="ml-6"><h4 class="font-bold text-sm text-slate-900">2. Sample parcel handover</h4><p class="text-xs text-slate-500">Illustrative event only • Not verified</p></li>
+          <li class="ml-6"><h4 class="font-bold text-sm text-slate-900">3. Sample scheduled transit</h4><p class="text-xs text-slate-500">Illustrative event only • No live rider connection</p></li>
+          <li class="ml-6"><h4 class="font-bold text-sm text-slate-900">4. Sample delivery completion</h4><p class="text-xs text-slate-500">Illustrative event only • No proof of delivery exists</p></li>
+        `;
+      } else {
+        displayId.textContent = rawId;
+        statusBadge.textContent = 'No demo record found';
+        statusBadge.className = 'px-3 py-1 rounded-full bg-slate-200 text-slate-800 text-xs font-bold';
+        timeline.innerHTML = '<li class="ml-6"><h4 class="font-bold text-sm text-slate-900">No matching demo reference</h4><p class="text-xs text-slate-500">Check the ID or create a new demo waybill above. This page is not connected to live shipment records.</p></li>';
+      }
+    }
+
+    // Partner Section Helpers
+    function selectPartnerRole(role) {
+      const select = document.getElementById('partnerRole');
+      select.value = role;
+      document.getElementById('partnerForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('partnerName').focus();
+    }
+
+    function handlePartnerSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('partnerName').value.trim();
+      const phone = document.getElementById('partnerPhone').value.trim();
+      const role = document.getElementById('partnerRole').value;
+      const location = document.getElementById('partnerLocation').value.trim();
+      const message = encodeURIComponent(
+        `Hello Ripple Rwanda, I would like to discuss a partnership.\\nName: ${name}\\nPhone: ${phone}\\nCategory: ${role}\\nMarket/base: ${location || 'Not specified'}`
+      );
+      document.getElementById('partnerSuccessMsg').classList.remove('hidden');
+      document.getElementById('partnerSuccessMsg').innerHTML = 'WhatsApp is opening with your enquiry. Please press Send in WhatsApp. This website does not store your registration.';
+      window.open(`https://wa.me/250726591807?text=${message}`, '_blank', 'noopener');
+    }
+
+    // Station Pass Modal Controls
+    function openStationPassModal() {
+      renderQRCode('stationQrCanvas', 'KGL-KIMIRONKO-01');
+      document.getElementById('stationPassModal').classList.remove('hidden');
+    }
+
+    function closeStationPassModal() {
+      document.getElementById('stationPassModal').classList.add('hidden');
+    }
+
+    // Custom Toast Message
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3400);
+    }
+
+    // Initialize default QR codes on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderQRCode('qrCanvas', 'RPL-KGL-104');
+      renderQRCode('stationQrCanvas', 'KGL-KIMIRONKO-01');
+    });
+  </script>
+</body>
+</html>
