@@ -40,6 +40,11 @@ html{scroll-behavior:smooth}
 @keyframes videoShine{0%,65%,100%{left:-45%}35%{left:130%}}
 .project:nth-of-type(odd){animation-delay:.08s}.project:nth-of-type(even){animation-delay:.18s}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.video-showcase,.video-showcase:before{animation:none!important}.video-showcase video{transition:none!important}}
 </style>
+
+  <style>
+    /* Let the browser defer off-screen section rendering on long pages. */
+    main > section, main > article { content-visibility: auto; contain-intrinsic-size: auto 650px; }
+  </style>
 </head>
 <body>
 <header><div class="wrap"><nav><strong>NDATIMANA JEAN DE DIEU</strong><div><a href="index.html">Home</a> &nbsp; <a href="blog.html">Articles</a></div></nav><div class="hero"><div class="kicker">Selected work and initiatives</div><h1>Projects built around real needs.</h1><p>A growing collection of technology, entrepreneurship and community-focused work. These case studies describe my role and the current stage of each initiative as accurately as possible.</p></div></div></header>
