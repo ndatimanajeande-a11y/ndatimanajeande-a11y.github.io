@@ -66,7 +66,7 @@
 
   <!-- Prototype disclosure: this page is a concept/demo, not a live dispatch platform. -->
   <div class="bg-amber-100 text-amber-950 text-sm py-3 px-4 text-center font-semibold border-b border-amber-300" role="status">
-    CONCEPT WEBSITE / DEMO ONLY: booking requests are submitted to a Google Sheet for review; tracking and partner registrations remain demonstrations, and no deliveries are dispatched automatically. Contact the team on WhatsApp to confirm a real request.
+    CONCEPT WEBSITE / DEMO ONLY: the booking form attempts to send requests to a Google Sheet, but saving is not yet verified. Tracking and partner registrations are demonstrations, and no deliveries are dispatched automatically. Contact the team on WhatsApp to confirm a real request.
   </div>
 
   <!-- Top Pilot Announcement Bar -->
@@ -1095,8 +1095,8 @@
         bookingId = `DEMO-RPL-${randomDigits}`;
       } while (bookingsDB[bookingId]);
 
-      // Send booking details to the Google Sheet. The Apps Script endpoint accepts a simple text/plain POST.
-      let sheetRequestSent = false;
+      // Attempt to send booking details. A no-cors response cannot confirm that Google Sheets saved the row.
+      let sheetRequestAttempted = false;
       try {
         await fetch(BOOKING_ENDPOINT, {
           method: 'POST',
@@ -1117,8 +1117,8 @@
             status: 'New - needs manual confirmation'
           })
         });
-        // no-cors responses are opaque; the sheet must be checked to confirm the row arrived.
-        sheetRequestSent = true;
+        // The browser cannot inspect this no-cors response, so do not treat it as a confirmed save.
+        sheetRequestAttempted = true;
       } catch (error) {
         console.error('Ripple booking sheet submission failed:', error);
       }
@@ -1168,7 +1168,7 @@
       document.getElementById('trackInput').value = bookingId;
       runTrackerSearch();
 
-      showToast(sheetRequestSent ? `Booking request sent to the sheet. Check Ripple Bookings to confirm it was recorded. Send the WhatsApp request for manual confirmation.` : `Demo reference ${bookingId} created locally. Sheet submission failed; use WhatsApp for manual confirmation.`);
+      showToast(sheetRequestAttempted ? `Demo reference ${bookingId} created in this browser. Sheet delivery was attempted but is NOT confirmed. Please send the WhatsApp request for manual confirmation.` : `Demo reference ${bookingId} created locally. Sheet request could not be sent. Please use WhatsApp for manual confirmation.`);
       document.getElementById('waybillCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
