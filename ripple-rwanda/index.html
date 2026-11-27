@@ -662,7 +662,7 @@
         <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Ecosystem & Pilot Partnerships</span>
         <h2 class="font-display text-2xl sm:text-4xl font-extrabold mt-2">Drive or Partner With Ripple Rwanda</h2>
         <p class="text-emerald-200 mt-3 text-sm sm:text-base">
-          We work hand-in-hand with market cooperatives, FERWACOTAMO-affiliated moto riders, and cargo mini-van operators across Kigali.
+          Ripple is seeking discussions with market cooperatives, moto-taxi riders, and cargo mini-van operators in Kigali. Partnerships and operating arrangements are not yet confirmed.
         </p>
       </div>
 
@@ -674,10 +674,10 @@
             <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4">
               <i class="fa-solid fa-store"></i>
             </div>
-            <span class="text-xs font-bold uppercase text-amber-400">Pilot Starting Dec 7, 2026</span>
+            <span class="text-xs font-bold uppercase text-amber-400">Proposed pilot · December 2026</span>
             <h3 class="font-display font-bold text-xl mt-1 mb-3">Market Vendors & Cooperatives</h3>
             <p class="text-sm text-emerald-100/90 leading-relaxed mb-4">
-              Join our 4-week Kimironko Market pilot cohort. Cut delivery costs by 40–60% vs. private car hires and serve more off-site customers daily.
+              Register your interest in a proposed Kimironko Market pilot. Pricing, delivery performance and any potential savings will be tested before launch.
             </p>
           </div>
           <button type="button" onclick="selectPartnerRole('Market Vendor / Cooperative')" class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition">
@@ -723,7 +723,7 @@
       <!-- Partner Inquiry Form -->
       <div class="max-w-2xl mx-auto bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl">
         <h3 class="font-display font-bold text-xl text-slate-900 mb-1">Partner & Pilot Onboarding Form</h3>
-        <p class="text-xs sm:text-sm text-slate-500 mb-5">This prototype does not store partner registrations. Your details are included in a WhatsApp message only when you submit the form.</p>
+        <p class="text-xs sm:text-sm text-slate-500 mb-5">This prototype does not store partner registrations. Your details are placed in a WhatsApp message; you must press Send in WhatsApp for the team to receive them.</p>
         
         <form id="partnerForm" onsubmit="handlePartnerSubmit(event)" class="space-y-4">
           <div class="grid sm:grid-cols-2 gap-4">
@@ -1086,6 +1086,13 @@
       const vendor = document.getElementById('vendorName').value.trim();
       const vendorPhone = document.getElementById('vendorPhone').value.trim();
       const recipient = document.getElementById('recipientName').value.trim();
+      const phoneDigits = vendorPhone.replace(/[\\s()+-]/g, '');
+      if (!/^(?:0?7\\d{8}|2507\\d{8})$/.test(phoneDigits)) {
+        document.getElementById('vendorPhone').setCustomValidity('Enter a valid Rwanda mobile number, for example 0788 123 456 or +250 788 123 456.');
+        document.getElementById('vendorPhone').reportValidity();
+        document.getElementById('vendorPhone').addEventListener('input', function clearPhoneError() { this.setCustomValidity(''); }, { once: true });
+        return;
+      }
       const recipientLoc = document.getElementById('recipientLocation').value.trim();
 
       // Generate a less collision-prone demo reference. This is not a server booking ID.
