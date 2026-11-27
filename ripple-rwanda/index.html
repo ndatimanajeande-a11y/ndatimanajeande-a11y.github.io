@@ -1086,8 +1086,8 @@
       const vendor = document.getElementById('vendorName').value.trim();
       const vendorPhone = document.getElementById('vendorPhone').value.trim();
       const recipient = document.getElementById('recipientName').value.trim();
-      const phoneDigits = vendorPhone.replace(/[\\s()+-]/g, '');
-      if (!/^(?:0?7\\d{8}|2507\\d{8})$/.test(phoneDigits)) {
+      const phoneDigits = vendorPhone.replace(/[\s()+-]/g, '');
+      if (!/^(?:0?7\d{8}|2507\d{8})$/.test(phoneDigits)) {
         document.getElementById('vendorPhone').setCustomValidity('Enter a valid Rwanda mobile number, for example 0788 123 456 or +250 788 123 456.');
         document.getElementById('vendorPhone').reportValidity();
         document.getElementById('vendorPhone').addEventListener('input', function clearPhoneError() { this.setCustomValidity(''); }, { once: true });
